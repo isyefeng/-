@@ -1,0 +1,107 @@
+C51 COMPILER V9.01   MAIN                                                                  02/22/2019 21:50:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil4\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "includes.h"
+   2          
+   3          bit m_tim_flag;
+   4          U8 m_beyond_temp = 30;  //默认报警温度
+   5          U8 m_beyond_dt = 90;    //默认报警湿度
+   6          
+   7          code U8 recv_temp[10] = "010000";
+   8          code U8 recv_dt[10] = "010001";
+   9            
+  10          void TIM0_Init(void)
+  11          {
+  12   1        TMOD |= 0X01;
+  13   1        TH0 = (65535-1000)/256;
+  14   1        TL0 = (65535-1000)%256;
+  15   1        TR0=1;
+  16   1        EA = 1;
+  17   1        ET0=1;
+  18   1      }
+  19          
+  20          void Global_Driver_Init(void)
+  21          {
+  22   1        EXTI_Init();//初始化串口中断
+  23   1        ESP_Init();
+  24   1        TIM0_Init();
+  25   1      }
+  26          
+  27          void temperture_error_send(uint8_t* DHT_DATA)
+  28          {
+  29   1          uint8_t send_buf[6] = {0, };
+  30   1          send_buf[0] = DHT_DATA[0]/10 + 48;
+  31   1          send_buf[1] = DHT_DATA[0]%10 + 48;
+  32   1          send_buf[2] = DHT_DATA[2]/10 + 48;
+  33   1          send_buf[3] = DHT_DATA[2]%10 + 48;
+  34   1          send_buf[4] = '\r';
+  35   1          send_buf[5] = '\n';
+  36   1          ESP_no_return_send("AT+CIPSEND=4\r\n",100);
+  37   1          ESP_send_commend(send_buf,"OK",100);
+  38   1      }
+  39          
+  40          void main(void)
+  41          {
+  42   1        uint8_t DHT_DATA[4] = {0,};
+  43   1        U8 * esp_recv = NULL;
+  44   1        Global_Driver_Init();
+  45   1        LED1=0;
+  46   1        if(!ESP_Link_com())
+  47   1        {
+  48   2          LED8=0;
+  49   2          while(1);
+  50   2        }
+  51   1        P1 = 0xff;
+  52   1        while(1)
+  53   1        {
+  54   2          if(m_tim_flag)
+  55   2          {
+C51 COMPILER V9.01   MAIN                                                                  02/22/2019 21:50:51 PAGE 2   
+
+  56   3              Temperture_read(DHT_DATA);
+  57   3          }
+  58   2          esp_recv = ESP_recv_data();
+  59   2          if(esp_recv != NULL)  //接收到wifi发来的命令
+  60   2          {
+  61   3            LED1 = 0;
+  62   3            if(strstr(esp_recv, recv_temp) != NULL)
+  63   3            {
+  64   4              m_beyond_temp = (*(esp_recv + 6) - 48)*10 + (*(esp_recv + 7) - 48);//求出传递温度
+  65   4            }
+  66   3          }
+  67   2          P1 = 0xff;
+  68   2        }
+  69   1      }
+  70          
+  71          void tim0() interrupt 1
+  72          {
+  73   1        static uint8_t index;
+  74   1        TH0 = (65535-1000)/256;
+  75   1        TL0 = (65535-1000)%256;
+  76   1        index++;
+  77   1        if(index == 200)
+  78   1        {
+  79   2          index = 0;
+  80   2          m_tim_flag = ~m_tim_flag;
+  81   2        }
+  82   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    301    ----
+   CONSTANT SIZE    =     48    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

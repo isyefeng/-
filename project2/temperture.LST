@@ -1,0 +1,85 @@
+C51 COMPILER V9.01   TEMPERTURE                                                            02/22/2019 00:01:20 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEMPERTURE
+OBJECT MODULE PLACED IN temperture.OBJ
+COMPILER INVOKED BY: E:\keil4\C51\BIN\C51.EXE temperture.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "temperture.h"
+   2          
+   3          static void Delay_10us()    //@11.0592MHz
+   4          {
+   5   1         U8 i;
+   6   1        i--;
+   7   1        i--;
+   8   1        i--;
+   9   1        i--;
+  10   1        i--;
+  11   1        i--;
+  12   1      }
+  13          
+  14          static void Delay(U16 j)
+  15          {     
+  16   1        U8 i;
+  17   1        for(;j>0;j--)
+  18   1        {   
+  19   2        for(i=0;i<27;i++);
+  20   2      
+  21   2        }
+  22   1      }
+  23          
+  24          
+  25          void Temperture_read(U8* recv_buf)
+  26          {
+  27   1        U8 index1 = 0;
+  28   1        U8 index2 = 0;
+  29   1        //主机拉低18ms 
+  30   1        QD=0;
+  31   1         Delay(180);
+  32   1         QD=1;
+  33   1       //总线由上拉电阻拉高 主机延时20us
+  34   1         Delay_10us();
+  35   1         Delay_10us();
+  36   1         Delay_10us();
+  37   1         Delay_10us();
+  38   1       //主机设为输入 判断从机响应信号 
+  39   1         QD=1;
+  40   1       //判断从机是否有低电平响应信号 如不响应则跳出，响应则向下运行    
+  41   1         if(!QD)     //T !    
+  42   1         {
+  43   2           while(!QD);
+  44   2           while(QD);
+  45   2          for(index1 = 0;index1 < 4;index1++)
+  46   2          {
+  47   3            for(index2 = 0;index2 < 8;index2++)
+  48   3            {
+  49   4              while(!QD);
+  50   4              Delay_10us();
+  51   4              Delay_10us();
+  52   4              Delay_10us();
+  53   4              recv_buf[index1]<<=1;
+  54   4              if(QD)
+  55   4                recv_buf[index1]|=1;
+C51 COMPILER V9.01   TEMPERTURE                                                            02/22/2019 00:01:20 PAGE 2   
+
+  56   4              while(QD);
+  57   4            }
+  58   3          }
+  59   2        }
+  60   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    152    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,32 @@
+//		Delay10ms(20);
+//		stat = ESP_send_commend("AT\r\n","OK",100);
+//		if(stat)
+//		{
+//			LED2=0;
+//			Delay10ms(20);
+//			if(ESP_send_commend("AT+CWMODE=3\r\n","OK",100))
+//			{
+//				LED3=0;
+//				Delay10ms(20);
+//				for(index = 0;index < 3;index++)
+//				{
+//					if(ESP_send_commend("AT+CWJAP=\"TP-LINK_ACEC34\",\"10086111\"\r\n","OK",1000))
+//					{
+//						LED4=0;
+//						Delay10ms(20);
+//						if(ESP_send_commend("AT+CIPSTART=\"TCP\",\"192.168.1.101\",8080\r\n","OK",500))
+//						{
+//							LED5=0;
+//							ESP_no_return_send("AT+CIPSEND=4\r\n",100);
+//							if(ESP_send_commend("TXOK\r\n","OK",100))
+//							{
+//								LED6=0;
+//								while(1);
+//							}
+//						}
+//						while(1);
+//					}
+//					Delay10ms(100);
+//				}
+//			}
+//		}

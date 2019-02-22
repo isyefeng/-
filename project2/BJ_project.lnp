@@ -1,0 +1,9 @@
+"STARTUP.obj",
+"main.obj",
+"interrupt.obj",
+"ESP8266.obj",
+"Delay.obj",
+"temperture.obj",
+"osp_global_str.obj" 
+TO "BJ_project" 
+RAMSIZE(256) 

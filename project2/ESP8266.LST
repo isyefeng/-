@@ -1,0 +1,119 @@
+C51 COMPILER V9.01   ESP8266                                                               02/22/2019 21:49:07 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE ESP8266
+OBJECT MODULE PLACED IN ESP8266.OBJ
+COMPILER INVOKED BY: E:\keil4\C51\BIN\C51.EXE ESP8266.C BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "ESP8266.h"
+   2          
+   3          sbit LED1=P1^0;
+   4          sbit LED2=P1^1;
+   5          sbit LED3=P1^2;
+   6          sbit LED4=P1^3;
+   7          sbit LED5=P1^4;
+   8          sbit LED6=P1^5;
+   9          sbit LED7=P1^6;
+  10          sbit LED8=P1^7;   //用于警告返回字符太多
+  11          
+  12          void ESP_Init(void)
+  13          {
+  14   1        EN = 0;
+  15   1        Delay100us(10);
+  16   1        EN = 1;
+  17   1        Delay100us(10);
+  18   1      }
+  19          
+  20          BOOL ESP_send_commend(uint8_t * Temp, uint8_t * hrecv, uint16_t time)
+  21          {
+  22   1        osp_memset(recv_buf, 0, sizeof(recv_buf));  //清除一次串口缓存
+  23   1        m_index = 0;
+  24   1        Send_types(Temp);
+  25   1        Delay100us(time);
+  26   1        if(m_index >= 20)
+  27   1          LED8=0;
+  28   1        m_index = 0;    //从头开始接收
+  29   1        if(strstr(recv_buf, hrecv) != NULL)
+  30   1          return TURE;
+  31   1        else
+  32   1          return FALSE;
+  33   1      }
+  34          
+  35          void ESP_no_return_send(uint8_t * Temp, uint16_t time)
+  36          {
+  37   1        osp_memset(recv_buf, 0, sizeof(recv_buf));  //清除一次串口缓存
+  38   1        m_index = 0;
+  39   1        Send_types(Temp);
+  40   1        Delay100us(time);
+  41   1      }
+  42          
+  43          U8* ESP_recv_data(void)
+  44          {
+  45   1        if(m_index != 0)
+  46   1        {
+  47   2          Delay100us(100);  //10ms延时，足够接收串口发来的数据
+  48   2          m_index = 0;
+  49   2          if(strstr(recv_buf, "+IPD,8:") != NULL)
+  50   2          {
+  51   3            return recv_buf + 7;
+  52   3          }
+  53   2        }
+  54   1        return NULL;
+  55   1      }
+C51 COMPILER V9.01   ESP8266                                                               02/22/2019 21:49:07 PAGE 2   
+
+  56          
+  57          BOOL ESP_Link_com(void)
+  58          {
+  59   1        uint8_t index = 0;
+  60   1        uint8_t index1 = 0;
+  61   1        
+  62   1        for(index1 = 0;index1 < 10;index1++)
+  63   1        {
+  64   2          Delay10ms(20);
+  65   2          if(ESP_send_commend("AT\r\n","OK",100))
+  66   2          {
+  67   3            LED2=0;
+  68   3            Delay10ms(20);
+  69   3            if(ESP_send_commend("AT+CWMODE=3\r\n","OK",100))
+  70   3            {
+  71   4              LED3=0;
+  72   4              Delay10ms(20);
+  73   4              for(index = 0;index < 3;index++)
+  74   4              {
+  75   5                if(ESP_send_commend("AT+CWJAP=\"TP-LINK_ACEC34\",\"10086111\"\r\n","OK",1000))
+  76   5                {
+  77   6                  LED4=0;
+  78   6                  Delay10ms(20);
+  79   6                  if(ESP_send_commend("AT+CIPSTART=\"TCP\",\"192.168.1.101\",8080\r\n","OK",500))
+  80   6                  {
+  81   7                    LED5=0;
+  82   7                    ESP_no_return_send("AT+CIPSEND=4\r\n",100);
+  83   7                    ESP_send_commend("TXOK\r\n","OK",100);
+  84   7                    LED6=0;
+  85   7                    return TURE;
+  86   7                  }
+  87   6                }
+  88   5                Delay10ms(100);
+  89   5              }
+  90   4            }
+  91   3          }
+  92   2        }
+  93   1        return FALSE;
+  94   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    464    ----
+   CONSTANT SIZE    =    132    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

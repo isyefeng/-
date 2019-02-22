@@ -1,0 +1,732 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/22/2019  21:50:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL4\C51\BIN\BL51.EXE STARTUP.obj, main.obj, interrupt.obj, ESP8266.obj, Delay.obj, temperture.obj, osp_global_str.o
+>> bj TO BJ_project RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  interrupt.obj (INTERRUPT)
+  ESP8266.obj (ESP8266)
+  Delay.obj (DELAY)
+  temperture.obj (TEMPERTURE)
+  osp_global_str.obj (OSP_GLOBAL_STR)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C_INIT)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?COPY)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?CLDPTR)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?CSTPTR)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?CSTOPTR)
+  E:\KEIL4\C51\LIB\C51S.LIB (?C?LLDIIDATA)
+  E:\KEIL4\C51\LIB\C51S.LIB (STRSTR)
+
+
+LINK MAP OF MODULE:  BJ_project (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?MAIN
+                    000BH     0005H                  *** GAP ***
+            REG     0010H     0008H     ABSOLUTE     "REG BANK 2"
+                    0018H     0008H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
+                    0020H.1   0000H.7                *** GAP ***
+            DATA    0021H     0029H     UNIT         ?DT?INTERRUPT
+            DATA    004AH     001DH     UNIT         _DATA_GROUP_
+            DATA    0067H     0009H     UNIT         ?DT?_TEMPERTURE_ERROR_SEND?MAIN
+            IDATA   0070H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0008H     UNIT         ?PR?_SENTTEMP?INTERRUPT
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0010H     UNIT         ?PR?TIM0_INIT?MAIN
+                    001EH     0005H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     0190H     UNIT         ?C?LIB_CODE
+            CODE    01B6H     0100H     UNIT         ?PR?ESP_LINK_COM?ESP8266
+            CODE    02B6H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0342H     0084H     UNIT         ?CO?ESP8266
+            CODE    03C6H     0082H     UNIT         ?PR?_STRSTR?STRSTR
+            CODE    0448H     007EH     UNIT         ?PR?MAIN?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 2
+
+
+            CODE    04C6H     007BH     UNIT         ?PR?_TEMPERTURE_ERROR_SEND?MAIN
+            CODE    0541H     0074H     UNIT         ?PR?_TEMPERTURE_READ?TEMPERTURE
+            CODE    05B5H     0052H     UNIT         ?PR?_ESP_SEND_COMMEND?ESP8266
+            CODE    0607H     0036H     UNIT         ?PR?ESP_RECV_DATA?ESP8266
+            CODE    063DH     0030H     UNIT         ?CO?MAIN
+            CODE    066DH     002EH     UNIT         ?PR?_ESP_NO_RETURN_SEND?ESP8266
+            CODE    069BH     002AH     UNIT         ?PR?RSINTR?INTERRUPT
+            CODE    06C5H     0023H     UNIT         ?PR?_SEND_TYPES?INTERRUPT
+            CODE    06E8H     0022H     UNIT         ?PR?_DELAY100US?DELAY
+            CODE    070AH     0021H     UNIT         ?PR?_OSP_MEMSET?OSP_GLOBAL_STR
+            CODE    072BH     0020H     UNIT         ?PR?_DELAY10MS?DELAY
+            CODE    074BH     001BH     UNIT         ?PR?TIM0?MAIN
+            CODE    0766H     001AH     UNIT         ?PR?ESP_INIT?ESP8266
+            CODE    0780H     0017H     UNIT         ?PR?EXTI_INIT?INTERRUPT
+            CODE    0797H     0017H     UNIT         ?PR?_DELAY?TEMPERTURE
+            CODE    07AEH     000DH     UNIT         ?PR?DELAY_10US?TEMPERTURE
+            CODE    07BBH     0009H     UNIT         ?PR?GLOBAL_DRIVER_INIT?MAIN
+            CODE    07C4H     0007H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   BJ_project (?C_STARTUP)
+
+
+SEGMENT                                   DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH
+-------------------------------------------------------
+?C_C51STARTUP                           -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                           004AH    0007H
+  +--> ?CO?MAIN
+  +--> ?PR?GLOBAL_DRIVER_INIT?MAIN
+  +--> ?PR?ESP_LINK_COM?ESP8266
+  +--> ?PR?_TEMPERTURE_READ?TEMPERTURE
+  +--> ?PR?ESP_RECV_DATA?ESP8266
+  +--> ?PR?_STRSTR?STRSTR
+
+?PR?GLOBAL_DRIVER_INIT?MAIN             -----    -----
+  +--> ?PR?EXTI_INIT?INTERRUPT
+  +--> ?PR?ESP_INIT?ESP8266
+  +--> ?PR?TIM0_INIT?MAIN
+
+?PR?ESP_INIT?ESP8266                    -----    -----
+  +--> ?PR?_DELAY100US?DELAY
+
+?PR?_DELAY100US?DELAY                   005BH    0004H
+
+?PR?ESP_LINK_COM?ESP8266                0051H    0002H
+  +--> ?PR?_DELAY10MS?DELAY
+  +--> ?CO?ESP8266
+  +--> ?PR?_ESP_SEND_COMMEND?ESP8266
+  +--> ?PR?_ESP_NO_RETURN_SEND?ESP8266
+
+?PR?_DELAY10MS?DELAY                    0053H    0004H
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 3
+
+
+?PR?_ESP_SEND_COMMEND?ESP8266           0053H    0008H
+  +--> ?PR?_OSP_MEMSET?OSP_GLOBAL_STR
+  +--> ?PR?_SEND_TYPES?INTERRUPT
+  +--> ?PR?_DELAY100US?DELAY
+  +--> ?PR?_STRSTR?STRSTR
+
+?PR?_OSP_MEMSET?OSP_GLOBAL_STR          005BH    0008H
+
+?PR?_SEND_TYPES?INTERRUPT               005BH    0003H
+  +--> ?PR?_SENTTEMP?INTERRUPT
+
+?PR?_STRSTR?STRSTR                      005BH    000CH
+
+?PR?_ESP_NO_RETURN_SEND?ESP8266         0053H    0005H
+  +--> ?PR?_OSP_MEMSET?OSP_GLOBAL_STR
+  +--> ?PR?_SEND_TYPES?INTERRUPT
+  +--> ?PR?_DELAY100US?DELAY
+
+?PR?_TEMPERTURE_READ?TEMPERTURE         0051H    0004H
+  +--> ?PR?_DELAY?TEMPERTURE
+  +--> ?PR?DELAY_10US?TEMPERTURE
+
+?PR?DELAY_10US?TEMPERTURE               0055H    0001H
+
+?PR?ESP_RECV_DATA?ESP8266               -----    -----
+  +--> ?PR?_DELAY100US?DELAY
+  +--> ?CO?ESP8266
+  +--> ?PR?_STRSTR?STRSTR
+
+
+
+SYMBOL TABLE OF MODULE:  BJ_project (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:02B6H         SEGMENT       ?C_C51STARTUP
+  I:0070H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:02B9H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:02B6H         SYMBOL        STARTUP1
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 4
+
+
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:02B6H         LINE#         133
+  C:02B8H         LINE#         134
+  C:02B9H         LINE#         135
+  C:02BAH         LINE#         136
+  C:02BCH         LINE#         185
+  C:02BFH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:0090H.0       PUBLIC        LED1
+  D:0009H         PUBLIC        m_beyond_dt
+  B:0090H.7       PUBLIC        LED8
+  D:00A8H         PUBLIC        IE
+  C:000EH         PUBLIC        TIM0_Init
+  B:0020H.0       PUBLIC        m_tim_flag
+  D:00B8H         PUBLIC        IP
+  C:07BBH         PUBLIC        Global_Driver_Init
+  C:0448H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:0663H         SYMBOL        _?ix1000
+  C:0669H         SYMBOL        _?ix1001
+  B:00A8H.1       PUBLIC        ET0
+  C:064FH         PUBLIC        recv_temp
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  C:0659H         PUBLIC        recv_dt
+  D:000AH         PUBLIC        m_beyond_temp
+  C:04C6H         PUBLIC        _temperture_error_send
+  D:00D0H         PUBLIC        PSW
+  C:074BH         PUBLIC        tim0
+  -------         PROC          TIM0_INIT
+  C:000EH         LINE#         10
+  C:000EH         LINE#         11
+  C:000EH         LINE#         12
+  C:0011H         LINE#         13
+  C:0014H         LINE#         14
+  C:0017H         LINE#         15
+  C:0019H         LINE#         16
+  C:001BH         LINE#         17
+  C:001DH         LINE#         18
+  -------         ENDPROC       TIM0_INIT
+  -------         PROC          GLOBAL_DRIVER_INIT
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 5
+
+
+  C:07BBH         LINE#         20
+  C:07BBH         LINE#         21
+  C:07BBH         LINE#         22
+  C:07BEH         LINE#         23
+  C:07C1H         LINE#         24
+  -------         ENDPROC       GLOBAL_DRIVER_INIT
+  -------         PROC          _TEMPERTURE_ERROR_SEND
+  D:0067H         SYMBOL        DHT_DATA
+  -------         DO            
+  D:006AH         SYMBOL        send_buf
+  -------         ENDDO         
+  C:04C6H         LINE#         27
+  C:04CCH         LINE#         28
+  C:04CCH         LINE#         29
+  C:04DFH         LINE#         30
+  C:04F1H         LINE#         31
+  C:04FCH         LINE#         32
+  C:050BH         LINE#         33
+  C:0516H         LINE#         34
+  C:0519H         LINE#         35
+  C:051CH         LINE#         36
+  C:0529H         LINE#         37
+  -------         ENDPROC       _TEMPERTURE_ERROR_SEND
+  -------         PROC          MAIN
+  -------         DO            
+  D:004AH         SYMBOL        DHT_DATA
+  D:004EH         SYMBOL        esp_recv
+  -------         ENDDO         
+  C:0448H         LINE#         40
+  C:0448H         LINE#         41
+  C:0448H         LINE#         42
+  C:045BH         LINE#         43
+  C:0464H         LINE#         44
+  C:0467H         LINE#         45
+  C:0469H         LINE#         46
+  C:046FH         LINE#         47
+  C:046FH         LINE#         48
+  C:0471H         LINE#         49
+  C:0473H         LINE#         50
+  C:0473H         LINE#         51
+  C:0476H         LINE#         52
+  C:0476H         LINE#         53
+  C:0476H         LINE#         54
+  C:0479H         LINE#         55
+  C:0479H         LINE#         56
+  C:0482H         LINE#         57
+  C:0482H         LINE#         58
+  C:048BH         LINE#         59
+  C:0490H         LINE#         60
+  C:0490H         LINE#         61
+  C:0492H         LINE#         62
+  C:04A3H         LINE#         63
+  C:04A3H         LINE#         64
+  C:04C1H         LINE#         65
+  C:04C1H         LINE#         66
+  C:04C1H         LINE#         67
+  C:04C4H         LINE#         68
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 6
+
+
+  -------         ENDPROC       MAIN
+  -------         PROC          TIM0
+  -------         DO            
+  D:0008H         SYMBOL        index
+  -------         ENDDO         
+  C:074BH         LINE#         71
+  C:074FH         LINE#         74
+  C:0752H         LINE#         75
+  C:0755H         LINE#         76
+  C:0757H         LINE#         77
+  C:075CH         LINE#         78
+  C:075CH         LINE#         79
+  C:075FH         LINE#         80
+  C:0761H         LINE#         81
+  C:0761H         LINE#         82
+  -------         ENDPROC       TIM0
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        INTERRUPT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:06C5H         PUBLIC        _Send_types
+  D:0099H         PUBLIC        SBUF
+  C:0780H         PUBLIC        EXTI_Init
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008DH         PUBLIC        TH1
+  D:0021H         PUBLIC        recv_buf
+  D:008BH         PUBLIC        TL1
+  C:0003H         PUBLIC        _sentTemp
+  B:0088H.6       PUBLIC        TR1
+  C:069BH         PUBLIC        RSINTR
+  D:00C8H         PUBLIC        T2CON
+  D:0049H         PUBLIC        m_index
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          EXTI_INIT
+  C:0780H         LINE#         6
+  C:0780H         LINE#         7
+  C:0780H         LINE#         8
+  C:0783H         LINE#         9
+  C:0786H         LINE#         10
+  C:0789H         LINE#         11
+  C:078BH         LINE#         12
+  C:078EH         LINE#         13
+  C:0790H         LINE#         14
+  C:0792H         LINE#         15
+  C:0794H         LINE#         16
+  C:0796H         LINE#         17
+  -------         ENDPROC       EXTI_INIT
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 7
+
+
+  -------         PROC          _SEND_TYPES
+  D:005BH         SYMBOL        Temp
+  C:06C5H         LINE#         19
+  C:06CBH         LINE#         20
+  C:06CBH         LINE#         21
+  C:06D7H         LINE#         22
+  C:06D7H         LINE#         23
+  C:06DAH         LINE#         24
+  C:06E5H         LINE#         25
+  C:06E7H         LINE#         26
+  -------         ENDPROC       _SEND_TYPES
+  -------         PROC          _SENTTEMP
+  D:0007H         SYMBOL        Temp
+  C:0003H         LINE#         28
+  C:0003H         LINE#         29
+  C:0003H         LINE#         30
+  C:0005H         LINE#         31
+  C:0008H         LINE#         32
+  C:000AH         LINE#         33
+  -------         ENDPROC       _SENTTEMP
+  -------         PROC          RSINTR
+  -------         DO            
+  D:0017H         SYMBOL        InPut3
+  -------         ENDDO         
+  C:069BH         LINE#         35
+  C:06A2H         LINE#         39
+  C:06A5H         LINE#         40
+  C:06A5H         LINE#         41
+  C:06A7H         LINE#         42
+  C:06AEH         LINE#         43
+  C:06B7H         LINE#         44
+  C:06BCH         LINE#         46
+  C:06BEH         LINE#         47
+  C:06C0H         LINE#         48
+  C:06C0H         LINE#         49
+  -------         ENDPROC       RSINTR
+  -------         ENDMOD        INTERRUPT
+
+  -------         MODULE        ESP8266
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:0090H.1       PUBLIC        LED2
+  B:0090H.2       PUBLIC        LED3
+  B:0090H.3       PUBLIC        LED4
+  B:0090H.4       PUBLIC        LED5
+  B:0090H.5       PUBLIC        LED6
+  B:0090H.7       PUBLIC        LED8
+  D:00A8H         PUBLIC        IE
+  B:0080H.0       PUBLIC        EN
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:066DH         PUBLIC        _ESP_no_return_send
+  C:05B5H         PUBLIC        _ESP_send_commend
+  C:0766H         PUBLIC        ESP_Init
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 8
+
+
+  D:00C8H         PUBLIC        T2CON
+  C:0607H         PUBLIC        ESP_recv_data
+  C:01B6H         PUBLIC        ESP_Link_com
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          ESP_INIT
+  C:0766H         LINE#         12
+  C:0766H         LINE#         13
+  C:0766H         LINE#         14
+  C:0768H         LINE#         15
+  C:0773H         LINE#         16
+  C:0775H         LINE#         17
+  -------         ENDPROC       ESP_INIT
+  -------         PROC          _ESP_SEND_COMMEND
+  D:0053H         SYMBOL        Temp
+  D:0056H         SYMBOL        hrecv
+  D:0059H         SYMBOL        time
+  C:05B5H         LINE#         20
+  C:05BBH         LINE#         21
+  C:05BBH         LINE#         22
+  C:05C9H         LINE#         23
+  C:05CCH         LINE#         24
+  C:05D5H         LINE#         25
+  C:05DFH         LINE#         26
+  C:05E6H         LINE#         27
+  C:05E8H         LINE#         28
+  C:05EBH         LINE#         29
+  C:0601H         LINE#         30
+  C:0604H         LINE#         32
+  C:0606H         LINE#         33
+  -------         ENDPROC       _ESP_SEND_COMMEND
+  -------         PROC          _ESP_NO_RETURN_SEND
+  D:0053H         SYMBOL        Temp
+  D:0056H         SYMBOL        time
+  C:066DH         LINE#         35
+  C:0677H         LINE#         36
+  C:0677H         LINE#         37
+  C:0685H         LINE#         38
+  C:0688H         LINE#         39
+  C:0691H         LINE#         40
+  -------         ENDPROC       _ESP_NO_RETURN_SEND
+  -------         PROC          ESP_RECV_DATA
+  C:0607H         LINE#         43
+  C:0607H         LINE#         44
+  C:0607H         LINE#         45
+  C:060BH         LINE#         46
+  C:060BH         LINE#         47
+  C:0616H         LINE#         48
+  C:0619H         LINE#         49
+  C:062FH         LINE#         50
+  C:062FH         LINE#         51
+  C:0636H         LINE#         52
+  C:0636H         LINE#         53
+  C:0636H         LINE#         54
+  C:063CH         LINE#         55
+  -------         ENDPROC       ESP_RECV_DATA
+  -------         PROC          ESP_LINK_COM
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 9
+
+
+  D:0051H         SYMBOL        index
+  D:0052H         SYMBOL        index1
+  -------         ENDDO         
+  C:01B6H         LINE#         57
+  C:01B6H         LINE#         58
+  C:01B6H         LINE#         59
+  C:01B9H         LINE#         60
+  C:01BBH         LINE#         62
+  C:01BDH         LINE#         63
+  C:01BDH         LINE#         64
+  C:01C8H         LINE#         65
+  C:01E6H         LINE#         66
+  C:01E6H         LINE#         67
+  C:01E8H         LINE#         68
+  C:01F3H         LINE#         69
+  C:0211H         LINE#         70
+  C:0211H         LINE#         71
+  C:0213H         LINE#         72
+  C:021EH         LINE#         73
+  C:0221H         LINE#         74
+  C:0221H         LINE#         75
+  C:023CH         LINE#         76
+  C:023CH         LINE#         77
+  C:023EH         LINE#         78
+  C:0249H         LINE#         79
+  C:0264H         LINE#         80
+  C:0264H         LINE#         81
+  C:0266H         LINE#         82
+  C:0273H         LINE#         83
+  C:028BH         LINE#         84
+  C:028DH         LINE#         85
+  C:0290H         LINE#         86
+  C:0290H         LINE#         87
+  C:0290H         LINE#         88
+  C:029BH         LINE#         89
+  C:02A7H         LINE#         90
+  C:02A7H         LINE#         91
+  C:02A7H         LINE#         92
+  C:02B3H         LINE#         93
+  C:02B5H         LINE#         94
+  -------         ENDPROC       ESP_LINK_COM
+  -------         ENDMOD        ESP8266
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  C:072BH         PUBLIC        _Delay10ms
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  C:06E8H         PUBLIC        _Delay100us
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY100US
+  D:005BH         SYMBOL        time
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 10
+
+
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:06E8H         LINE#         3
+  C:06F0H         LINE#         4
+  C:06F0H         LINE#         6
+  C:06FDH         LINE#         7
+  C:06FDH         LINE#         8
+  C:06FEH         LINE#         9
+  C:06FFH         LINE#         10
+  C:0701H         LINE#         11
+  C:0703H         LINE#         13
+  C:0703H         LINE#         14
+  C:0705H         LINE#         15
+  C:0707H         LINE#         16
+  C:0709H         LINE#         17
+  -------         ENDPROC       _DELAY100US
+  -------         PROC          _DELAY10MS
+  D:0053H         SYMBOL        time
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:072BH         LINE#         19
+  C:0733H         LINE#         20
+  C:0733H         LINE#         23
+  C:0740H         LINE#         24
+  C:0740H         LINE#         25
+  C:0742H         LINE#         26
+  C:0744H         LINE#         28
+  C:0744H         LINE#         29
+  C:0746H         LINE#         30
+  C:0748H         LINE#         31
+  C:074AH         LINE#         32
+  -------         ENDPROC       _DELAY10MS
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        TEMPERTURE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  B:00A0H.0       PUBLIC        QD
+  D:00B8H         PUBLIC        IP
+  C:07AEH         SYMBOL        Delay_10us
+  C:0541H         PUBLIC        _Temperture_read
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  C:0797H         SYMBOL        _Delay
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          DELAY_10US
+  -------         DO            
+  D:0055H         SYMBOL        i
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 11
+
+
+  C:07AEH         LINE#         3
+  C:07AEH         LINE#         4
+  C:07AEH         LINE#         6
+  C:07B0H         LINE#         7
+  C:07B2H         LINE#         8
+  C:07B4H         LINE#         9
+  C:07B6H         LINE#         10
+  C:07B8H         LINE#         11
+  C:07BAH         LINE#         12
+  -------         ENDPROC       DELAY_10US
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        j
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:0797H         LINE#         14
+  C:0797H         LINE#         15
+  C:0797H         LINE#         17
+  C:07A0H         LINE#         18
+  C:07A0H         LINE#         19
+  C:07A6H         LINE#         21
+  C:07ADH         LINE#         22
+  -------         ENDPROC       _DELAY
+  -------         PROC          _TEMPERTURE_READ
+  D:0051H         SYMBOL        recv_buf
+  -------         DO            
+  D:0004H         SYMBOL        index1
+  D:0054H         SYMBOL        index2
+  -------         ENDDO         
+  C:0541H         LINE#         25
+  C:0547H         LINE#         26
+  C:0547H         LINE#         27
+  C:0549H         LINE#         28
+  C:054BH         LINE#         30
+  C:054DH         LINE#         31
+  C:0553H         LINE#         32
+  C:0555H         LINE#         34
+  C:0558H         LINE#         35
+  C:055BH         LINE#         36
+  C:055EH         LINE#         37
+  C:0561H         LINE#         39
+  C:0563H         LINE#         41
+  C:0566H         LINE#         42
+  C:0566H         LINE#         43
+  C:0569H         LINE#         44
+  C:056CH         LINE#         45
+  C:056EH         LINE#         46
+  C:056EH         LINE#         47
+  C:0571H         LINE#         48
+  C:0571H         LINE#         49
+  C:0574H         LINE#         50
+  C:0577H         LINE#         51
+  C:057AH         LINE#         52
+  C:057DH         LINE#         53
+  C:058FH         LINE#         54
+  C:0592H         LINE#         55
+  C:05A4H         LINE#         56
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 12
+
+
+  C:05A7H         LINE#         57
+  C:05B0H         LINE#         58
+  C:05B4H         LINE#         59
+  C:05B4H         LINE#         60
+  -------         ENDPROC       _TEMPERTURE_READ
+  -------         ENDMOD        TEMPERTURE
+
+  -------         MODULE        OSP_GLOBAL_STR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:070AH         PUBLIC        _osp_memset
+  -------         PROC          _OSP_MEMSET
+  D:0001H         SYMBOL        pur_add
+  D:0005H         SYMBOL        pad_data
+  D:005FH         SYMBOL        lenth
+  -------         DO            
+  D:0007H         SYMBOL        index
+  D:0060H         SYMBOL        p_pur
+  -------         ENDDO         
+  C:070AH         LINE#         116
+  C:070AH         LINE#         117
+  C:070AH         LINE#         119
+  C:0710H         LINE#         120
+  C:0718H         LINE#         121
+  C:0718H         LINE#         122
+  C:0727H         LINE#         123
+  C:072AH         LINE#         125
+  -------         ENDPROC       _OSP_MEMSET
+  -------         ENDMOD        OSP_GLOBAL_STR
+
+  -------         MODULE        ?C?COPY
+  C:00F6H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:011CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0135H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0162H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0174H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?LLDIIDATA
+  C:019FH         PUBLIC        ?C?LLDIIDATA
+  C:0196H         PUBLIC        ?C?LLDIIDATA1
+  C:0198H         PUBLIC        ?C?LLDIIDATA8
+  -------         ENDMOD        ?C?LLDIIDATA
+
+  -------         MODULE        STRSTR
+  D:005BH         PUBLIC        ?_strstr?BYTE
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/22/2019  21:50:51  PAGE 13
+
+
+  C:03C6H         PUBLIC        _strstr
+  -------         ENDMOD        STRSTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_TEMPERTURE_ERROR_SEND?MAIN
+
+Program Size: data=99.1 xdata=0 code=1990
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
